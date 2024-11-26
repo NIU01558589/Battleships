@@ -48,7 +48,8 @@ public class Ship {
             "Les coordenades han de ser dins dels límits";
     boolean result = false;
       for (Cell cell : posicionsShip) {
-        assert (cell.getX() >= 0 && cell.getX() <= 10 && cell.getY() >= 0 && cell.getY() <= 10) :
+        assert (cell.getX() >= 0 && cell.getX() <= 10
+                && cell.getY() >= 0 && cell.getY() <= 10) :
                 "Les coordenades de la cel·la han de ser dins dels límits";
         if (cell.getX() == x && cell.getY() == y) {
             result = true;
