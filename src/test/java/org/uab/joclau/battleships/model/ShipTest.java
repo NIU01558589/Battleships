@@ -44,7 +44,11 @@ class ShipTest {
   // Statement Coverage
   @Test
   void TestIsHitStatementCoverage() {
+    List<Cell> cells = List.of(new Cell(1,1), new Cell(2,1), new Cell(10,10));
+    Ship ship = new Ship(cells, cells.size());
 
+    assertTrue(ship.isHit(1,1)); //If true
+    assertFalse(ship.isHit(3,1)); //If false
   }
 
   @Test
