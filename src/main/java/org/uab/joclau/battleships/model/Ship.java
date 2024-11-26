@@ -46,12 +46,12 @@ public class Ship {
   public boolean isHit(final int x, final int y) {
 
     boolean result = false;
-    for (int i = 0; i < posicionsShip.size(); i++) {
-      Cell cell = posicionsShip.get(i);
-      if (cell.getX() == x && cell.getY() == y) {
-        result =  true;
+      for (Cell cell : posicionsShip) {
+          if (cell.getX() == x && cell.getY() == y) {
+              result = true;
+              break;
+          }
       }
-    }
 
     return result;
   }
