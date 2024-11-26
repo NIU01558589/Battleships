@@ -58,7 +58,7 @@ public class Board {
      * @param x            the x-coordinate of the placement
      * @param y            the y-coordinate of the placement
      * @param isHorizontal true if the ship is placed horizontally, false otherwise trying to check failed test in order to check github actions if its correct
-     * @return true if the placement is valid, false otherwise
+     * @return true if the placement is valid, false otherwise  trying to check failed test in order to check github actions if its correct pt2 and now setting the workflow with a ruleset
      */
     public boolean isValidPlacement(Ship ship, int x,
                                     int y, boolean isHorizontal) {
