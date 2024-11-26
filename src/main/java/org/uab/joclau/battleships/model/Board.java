@@ -57,7 +57,7 @@ public class Board {
      * @param ship         the ship to validate
      * @param x            the x-coordinate of the placement
      * @param y            the y-coordinate of the placement
-     * @param isHorizontal true if the ship is placed horizontally, false otherwise
+     * @param isHorizontal true if the ship is placed horizontally
      * @return true if the placement is valid, false otherwise
      */
     public boolean isValidPlacement(Ship ship, int x,
