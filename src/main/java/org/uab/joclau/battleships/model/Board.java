@@ -26,8 +26,8 @@ public class Board {
      * @param isHorizontal true if the ship is placed
      *                     horizontally, false otherwise
      */
-    public void placeShip(final Ship ship, final int x,
-                          final int y, final boolean isHorizontal) {
+    public void placeShip(Ship ship, int x,
+                          int y, boolean isHorizontal) {
         // Implementation here
     }
 
@@ -38,7 +38,7 @@ public class Board {
      * @param y the y-coordinate of the shot
      * @return true if a ship was hit, false otherwise
      */
-    public boolean takeShot(final int x, final int y) {
+    public boolean takeShot(int x, int y) {
         return false;
     }
 
@@ -57,8 +57,7 @@ public class Board {
      * @param ship         the ship to validate
      * @param x            the x-coordinate of the placement
      * @param y            the y-coordinate of the placement
-     * @param isHorizontal true if the ship is
-     *                     placed horizontally, false otherwise
+     * @param isHorizontal true if the ship is placed horizontally, false otherwise trying to check failed test in order to check github actions if its correct
      * @return true if the placement is valid, false otherwise
      */
     public boolean isValidPlacement(Ship ship, int x,
