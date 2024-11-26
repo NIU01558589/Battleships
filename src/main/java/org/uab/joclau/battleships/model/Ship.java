@@ -70,7 +70,7 @@ public class Ship {
   /**
    * Gets the positions of the ship.
    *
-   * @return the list of cells occupied by the ship.
+   * @return the list of cells occupied by the ship. uqyuldqiawHDFIhawfauifqauwhfqauihfauihfqluibhquilhfquihfquihqluihiqlh
    */
   public List<Cell> getPosicionsShip() {
     return posicionsShip;
