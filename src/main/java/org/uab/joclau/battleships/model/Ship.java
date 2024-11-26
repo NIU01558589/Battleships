@@ -44,8 +44,16 @@ public class Ship {
    * specified coordinates, false otherwise.
    */
   public boolean isHit(final int x, final int y) {
-    return false;  // Implement logic
-    // to check if the ship is hit at the specified coordinates
+
+    boolean result = false;
+    for (int i = 0; i < posicionsShip.size(); i++) {
+      Cell cell = posicionsShip.get(i);
+      if (cell.getX() == x && cell.getY() == y) {
+        result =  true;
+      }
+    }
+
+    return result;
   }
 
   /**
