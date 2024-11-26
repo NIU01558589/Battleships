@@ -44,15 +44,20 @@ public class Ship {
    * specified coordinates, false otherwise.
    */
   public boolean isHit(final int x, final int y) {
-
+    assert (x >= 0 && x <= 10 && y >= 0 && y <= 10) :
+            "Les coordenades han de ser dins dels límits";
     boolean result = false;
       for (Cell cell : posicionsShip) {
-          if (cell.getX() == x && cell.getY() == y) {
-              result = true;
-              break;
-          }
+        assert (cell.getX() >= 0 && cell.getX() <= 10 && cell.getY() >= 0 && cell.getY() <= 10) :
+                "Les coordenades de la cel·la han de ser dins dels límits";
+        if (cell.getX() == x && cell.getY() == y) {
+            result = true;
+            break;
+        }
       }
-
+    assert (result == true && x >= 0 && x <= 10 && y >= 0 && y <= 10) ||
+            (result == false && !(x >= 0 && x <= 10 && y >= 0 && y <= 10)) :
+            "El resultat ha de ser coherent amb si la cel·la està ocupada o no";
     return result;
   }
 
