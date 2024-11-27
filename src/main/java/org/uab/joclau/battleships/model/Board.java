@@ -17,6 +17,13 @@ public class Board {
      */
     private List<Ship> ships;
 
+    public void setBoard(int[][] boardInput) {
+        this.board = boardInput;
+    }
+
+    public int[][] getBoard() {
+        return this.board;
+    }
     /**
      * Places a ship on the board.
      *
@@ -28,7 +35,14 @@ public class Board {
      */
     public void placeShip(Ship ship, int x,
                           int y, boolean isHorizontal) {
-        // Implementation here
+        for(int i = 0; i < ship.getTamany(); i++) {
+            if(isHorizontal) {
+                board[x][y+i] = 1;
+            }
+            else {
+                board[x+i][y] = 1;
+            }
+        }
     }
 
     /**
