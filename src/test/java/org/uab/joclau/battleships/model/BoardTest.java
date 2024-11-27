@@ -1,5 +1,7 @@
 package org.uab.joclau.battleships.model;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -308,6 +310,46 @@ class BoardTest {
     //Valor 9 9
 
     assertFalse(board.takeShot(10,10));
+  }
+
+  @Test
+  void takeShotJaColpejada(){
+    Board board = new Board();
+
+    //Doble colpejada aigua
+    board.takeShot(5,6);
+    assertFalse(board.takeShot(5,6));
+
+    //Doble colpejada vaixell
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.takeShot(0,0);
+    assertFalse(board.takeShot(0,0));
+
+  }
+
+  @Test
+  void takeShotCellAigua(){
+    Board board = new Board();
+
+    assertFalse(board.takeShot(5,6));
+  }
+
+  @Test
+  void takeShotCellVaixell(){
+    Board board = new Board();
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    assertTrue(board.takeShot(0,0));
+
   }
 
   @org.junit.jupiter.api.Test
