@@ -52,7 +52,57 @@ class ShipTest {
   }
 
   @Test
-  void markHit() {
+  void markHitLimitInterior() {
+    Cell c1 = new Cell(0,0);
+    Cell c2 = new Cell(10,10);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(10,10);
+    assertFalse(c1.isHit());
+    assertTrue(c2.isHit());
+  }
+
+  @Test
+  void markHitLimitExterior() {
+    Cell c1 = new Cell(0,0);
+    Cell c2 = new Cell(10,10);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(-1,-1);
+    ship.markHit(11,11);
+
+    assertFalse(c1.isHit());
+    assertFalse(c2.isHit());
+  }
+
+  @Test
+  void markHitGolpejat() {
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(2,3);
+    ship.markHit(4,6);
+
+    assertTrue(c1.isHit());
+    assertTrue(c2.isHit());
+  }
+
+  @Test
+  void markHitLimitNoGolpejat() {
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(3,3);
+    ship.markHit(4,7);
+
+    assertFalse(c1.isHit());
+    assertFalse(c2.isHit());
   }
 
   @Test
