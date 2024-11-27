@@ -104,7 +104,15 @@ public class Ship {
    * @return true if the ship is sunk, false otherwise.
    */
   public boolean isSunk() {
-    return false;  // Implement logic to check if the ship is sunk
+    //Hem de determinar si totes les Cells del vaixell han estat tocades
+    for(Cell cell: posicionsShip){
+
+      //Si una cell del vaixell no s'ha tocat no està enfonsat
+      if (cell.isHit() == false){
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
