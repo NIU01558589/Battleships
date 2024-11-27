@@ -264,21 +264,50 @@ class BoardTest {
 
   @org.junit.jupiter.api.Test
   void takeShotLimitInterior() {
-    /*
+
+    //Valor 00
     Board board = new Board();
     Cell c1 = new Cell(0,0);
 
     List<Cell> cells = List.of(c1);
     Ship ship = new Ship(cells, cells.size());
 
+    board.placeShip(ship, 0,0,true);
     assertTrue(board.takeShot(0,0));
 
-     */
+    //Valor 9 9
+    Cell c2 = new Cell(9,9);
+
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    board.placeShip(ship1, 9,9,true);
+    assertTrue(board.takeShot(9,9));
+
+    //Valor 5 5
+    Cell c3 = new Cell(5,5);
+
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells.size());
+
+    board.placeShip(ship2, 5,5,true);
+    assertTrue(board.takeShot(5,5));
+
+    //Valor sense vaixell
+    assertFalse(board.takeShot(3,4));
 
   }
 
   @org.junit.jupiter.api.Test
   void takeShotLimitExterior() {
+    //Valor -1
+    Board board = new Board();
+
+    assertFalse(board.takeShot(-1,-1));
+
+    //Valor 9 9
+
+    assertFalse(board.takeShot(10,10));
   }
 
   @org.junit.jupiter.api.Test
