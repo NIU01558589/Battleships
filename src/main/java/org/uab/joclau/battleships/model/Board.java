@@ -53,7 +53,9 @@ public class Board {
         List<Cell> llistaPosShip = ship.getPosicionsShip();
         for (int i = 0; i < shipSize; i++) {
             Cell cell = llistaPosShip.get(i);
-            if(board[cell.getX()][cell.getY()] == 1) {
+            if(cell.getX() >= board.length
+                    || cell.getY() >= board[0].length
+                        || board[cell.getX()][cell.getY()] == 1) {
                 return false;
             }
         }

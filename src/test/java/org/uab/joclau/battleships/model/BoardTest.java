@@ -140,6 +140,87 @@ class BoardTest {
     assertEquals(1, board.getBoard()[0][1]);
     assertEquals(1, board.getBoard()[0][2]);
   }
+  // DECISION COVERAGE
+  // PRIMER IF (true, false)
+  @org.junit.jupiter.api.Test
+  void placeShipDecisionFirstCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,8), new Cell(0,9), new Cell(0,10));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 8, true);
+    assertFalse(result);
+  }
+  // SEGON IF (false, true)
+  @org.junit.jupiter.api.Test
+  void placeShipDecisionSecondCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(8,0), new Cell(9,0), new Cell(10,0));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 8, false);
+    assertFalse(result);
+  }
+  // CONDITION COVERAGE
+  // PRIMER IF A TRUE, SEGON A FALSE
+  @org.junit.jupiter.api.Test
+  void placeShipConditionFirstCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,8), new Cell(0,9), new Cell(0,10));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 8, true);
+    assertFalse(result);
+  }
+  // PRIMER IF A FALSE, SEGON A TRUE
+  @org.junit.jupiter.api.Test
+  void placeShipConditionSecondCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(8,0), new Cell(9,0), new Cell(10,0));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 8, 0, true);
+    assertFalse(result);
+  }
+  // PRIMER IF A FALSE, SEGON A FALSE
+  @org.junit.jupiter.api.Test
+  void placeShipConditionThirdCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    assertTrue(result);
+  }
+  // PRIMER IF A TRUE, SEGON A TRUE
+  @org.junit.jupiter.api.Test
+  void placeShipConditionFourthCaseBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(8,8), new Cell(9,8), new Cell(10,8));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 8, 8, true);
+    assertFalse(result);
+  }
+  // LOOP SIMPLE
+  @org.junit.jupiter.api.Test
+  void placeShipFirstCell() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    // Comprovem que la cell i = 0  esta correctament validat
+    assertTrue(board.getBoard()[0][0] == 1);
+    assertTrue(result);
+  }
   @org.junit.jupiter.api.Test
   void takeShot() {
   }
