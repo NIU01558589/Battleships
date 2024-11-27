@@ -9,7 +9,11 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
-  void takeShot() {
+  void takeShotLimitInterior() {
+  }
+
+  @org.junit.jupiter.api.Test
+  void takeShotLimitExterior() {
   }
 
   @org.junit.jupiter.api.Test
