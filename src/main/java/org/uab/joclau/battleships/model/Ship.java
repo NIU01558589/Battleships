@@ -70,6 +70,15 @@ public class Ship {
    */
   public void markHit(final int x, final int y) {
     // Implement logic to mark the ship as hit at the specified coordinates
+
+    //Marcar cel·la com tocada
+    for(Cell cell: posicionsShip){
+      if(cell.getX() == x && cell.getY() == y){
+        cell.hit();
+        break;
+      }
+    }
+
   }
 
   /**

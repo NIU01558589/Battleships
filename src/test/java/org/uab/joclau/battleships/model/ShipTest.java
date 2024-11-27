@@ -2,6 +2,7 @@ package org.uab.joclau.battleships.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +53,137 @@ class ShipTest {
   }
 
   @Test
-  void markHit() {
+  void markHitLimitInterior() {
+    Cell c1 = new Cell(0,0);
+    Cell c2 = new Cell(10,10);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(10,10);
+    assertFalse(c1.isHit());
+    assertTrue(c2.isHit());
+  }
+
+  @Test
+  void markHitLimitExterior() {
+    Cell c1 = new Cell(0,0);
+    Cell c2 = new Cell(10,10);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(-1,-1);
+    ship.markHit(11,11);
+
+    assertFalse(c1.isHit());
+    assertFalse(c2.isHit());
+  }
+
+  @Test
+  void markHitGolpejat() {
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(2,3);
+    ship.markHit(4,6);
+
+    assertTrue(c1.isHit());
+    assertTrue(c2.isHit());
+  }
+
+  @Test
+  void markHitLimitNoGolpejat() {
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(3,3);
+    ship.markHit(4,7);
+
+    assertFalse(c1.isHit());
+    assertFalse(c2.isHit());
+  }
+
+  @Test
+  void markHitStatementCoverage() {
+
+    //Cordenades coincideixen
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(2,3);
+    ship.markHit(4,7);
+
+    assertTrue(c1.isHit());
+    assertFalse(c2.isHit());
+
+    //Coordenades no coincideixen
+    Cell c3 = new Cell(1,3);
+    Cell c4 = new Cell(5,6);
+    List<Cell> cells1 = List.of(c1, c2);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(3,3);
+
+    assertFalse(c3.isHit());
+    assertFalse(c4.isHit());
+
+    //Sense cells
+    //Creem un ship buit
+    Ship ship2 = new Ship(Collections.emptyList(),0);
+
+    ship2.markHit(3,3);
+    //Hem de comprovar que la llista es buida amb la funció isEmpty
+    assertTrue(ship2.getPosicionsShip().isEmpty());
+
+    //Més d'una Cell coincideix
+    Cell c5 = new Cell(1,3);
+    Cell c6 = new Cell(1,3);
+    List<Cell> cells2 = List.of(c5, c6);
+    Ship ship3 = new Ship(cells2, cells2.size());
+
+    ship3.markHit(1,3);
+
+    assertTrue(c5.isHit());
+    assertFalse(c6.isHit());
+
+
+  }
+
+  @Test
+  void markHitConditionCoverage() {
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(4,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    //x és false i y és true
+    ship.markHit(3,3);
+    //x és true i y és false
+    ship.markHit(4,7);
+
+    assertFalse(c1.isHit());
+    assertFalse(c2.isHit());
+  }
+
+  @Test
+  void markHitDecisionCoverage() {
+    Cell c1 = new Cell(3,3);
+    Cell c2 = new Cell(5,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    //x és true i y és true
+    ship.markHit(3,3);
+    //x és false i y és false
+    ship.markHit(4,7);
+
+    assertTrue(c1.isHit());
+    assertFalse(c2.isHit());
   }
 
   @Test
