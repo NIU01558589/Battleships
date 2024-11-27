@@ -194,9 +194,9 @@ class ShipTest {
     List<Cell> cells = List.of(c1, c2);
     Ship ship = new Ship(cells, cells.size());
 
-    //x és true i y és true
+
     ship.markHit(c1.getX(), c1.getY());
-    //x és false i y és false
+
     ship.markHit(c2.getX(), c2.getY());
 
     assertTrue(ship.isSunk());
@@ -207,20 +207,9 @@ class ShipTest {
     List<Cell> cells1 = List.of(c3, c4);
     Ship ship1 = new Ship(cells1, cells1.size());
 
-    //x és true i y és true
     ship1.markHit(c3.getX(), c3.getY());
 
     assertFalse(ship1.isSunk());
-
-    //NOMES TÉ UNA CELL ENFONSAT
-    List<Cell> cells2 = List.of(c3);
-    Ship ship2 = new Ship(cells2, cells2.size());
-    assertTrue(ship2.isSunk());
-
-    //NOMES TÉ UNA CELL NO ENFONSAT
-    List<Cell> cells3 = List.of(c4);
-    Ship ship3 = new Ship(cells3, cells2.size());
-    assertFalse(ship3.isSunk());
 
   }
 
@@ -273,4 +262,56 @@ class ShipTest {
 
     assertFalse(ship12.isSunk());
   }
+
+  @Test
+  void isSunkStatementCoverage() {
+
+    //CAS 1: VAIXELL COMPLETAMENT ENFONSAT
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(3,3);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertTrue(ship.isSunk());
+
+    //CAS 2: VAIXELL PARCIALMENT ENFONSAT
+    Cell c3 = new Cell(3,3);
+    Cell c4 = new Cell(3,4);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+
+    assertFalse(ship1.isSunk());
+
+    //CAS 3: VAIXELL SENSE TOCAR
+    Cell c5 = new Cell (3,5);
+    List<Cell> cell5 = List.of(c4,c5);
+    Ship ship5 = new Ship(cell5, cell5.size());
+
+    assertFalse(ship5.isSunk());
+
+    //CAS 4: VAIXELL AMB UNA CELL ENFONSAT
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells2.size());
+    assertTrue(ship2.isSunk());
+
+    //CAS 5: VAIXELL AMB UNA CELL NO ENFONSAT
+    List<Cell> cells3 = List.of(c4);
+    Ship ship3 = new Ship(cells3, cells2.size());
+    assertFalse(ship3.isSunk());
+
+    //CAS 6: VAIXELL EMPTY
+    Ship ship25 = new Ship(Collections.emptyList(),0);
+
+    //Hem de comprovar que la llista es buida amb la funció isEmpty
+    assertTrue(ship25.getPosicionsShip().isEmpty());
+    assertFalse(ship25.isSunk());
+
+  }
 }
+

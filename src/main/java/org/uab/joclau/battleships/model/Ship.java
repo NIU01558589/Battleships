@@ -105,6 +105,10 @@ public class Ship {
    */
   public boolean isSunk() {
     //Hem de determinar si totes les Cells del vaixell han estat tocades
+
+    if(posicionsShip.isEmpty()){
+      return false;
+    }
     for(Cell cell: posicionsShip){
 
       if(cell.getX() < 0 || cell.getX() > 10
