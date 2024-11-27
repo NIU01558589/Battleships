@@ -209,6 +209,7 @@ class BoardTest {
     assertFalse(result);
   }
   // LOOP SIMPLE
+  // i = 0
   @org.junit.jupiter.api.Test
   void placeShipFirstCell() {
     Board board = new Board();
@@ -219,6 +220,45 @@ class BoardTest {
     boolean result = board.placeShip(ship, 0, 0, true);
     // Comprovem que la cell i = 0  esta correctament validat
     assertTrue(board.getBoard()[0][0] == 1);
+    assertTrue(result);
+  }
+  // i = 1
+  @org.junit.jupiter.api.Test
+  void placeShipSecondCell() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    // Comprovem que la cell i = 1  esta correctament validat
+    assertTrue(board.getBoard()[0][1] == 1);
+    assertTrue(result);
+  }
+  // i = shipSize - 2
+  @org.junit.jupiter.api.Test
+  void placeShipPenultimateCell() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    // Comprovem que la cell i = shipsize - 2  esta correctament validat
+    assertTrue(board.getBoard()[0][1] == 1);
+    assertTrue(result);
+  }
+  // i = shipSize - 1
+  @org.junit.jupiter.api.Test
+  void placeShipLastCell() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    // Comprovem que la cell i = shipsize - 1  esta correctament validat
+    assertTrue(board.getBoard()[0][2] == 1);
     assertTrue(result);
   }
   @org.junit.jupiter.api.Test

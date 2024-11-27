@@ -41,8 +41,11 @@ public class Board {
      */
     public boolean placeShip(Ship ship, int x,
                           int y, boolean isHorizontal) {
+        //Precondicions
+        assert ship != null : "El vaixell no pot ser nul";
+        assert ship.getTamany() > 0 : "Tamany del vaixell positiu";
+        assert x >= 0 && y >= 0 : "Coordenades dins de"
         int shipSize = ship.getTamany();
-
         // Validar que el vaixell no surti dels límits
         if((isHorizontal && (y + shipSize > board[0].length))
                 ||(!isHorizontal &&(x+shipSize > board.length))) {
