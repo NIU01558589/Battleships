@@ -15,7 +15,7 @@ class BoardTest {
       List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
       Ship ship = new Ship(shipCells, shipCells.size());
 
-      board.placeShip(ship, 0, 0, true);
+      boolean result = board.placeShip(ship, 0, 0, true);
 
       assertEquals(1, board.getBoard()[0][0]);
       assertEquals(1, board.getBoard()[0][1]);

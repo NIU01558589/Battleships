@@ -33,16 +33,34 @@ public class Board {
      * @param isHorizontal true if the ship is placed
      *                     horizontally, false otherwise
      */
-    public void placeShip(Ship ship, int x,
+    public boolean placeShip(Ship ship, int x,
                           int y, boolean isHorizontal) {
-        for(int i = 0; i < ship.getTamany(); i++) {
-            if(isHorizontal) {
-                board[x][y+i] = 1;
-            }
-            else {
-                board[x+i][y] = 1;
+        int shipSize = ship.getTamany();
+
+        // Validar que el vaixell no surti dels límits
+        if((isHorizontal && (y + shipSize > board[0].length))
+                &&(!isHorizontal &&(x+shipSize > board.length))) {
+            return false;
+        }
+
+        // Validar que les cel·les no estiguin ocupades
+        for (int i = 0; i < shipSize; i++) {
+            List<Cell> llistaPosShip = ship.getPosicionsShip();
+            Cell cell = llistaPosShip.get(i);
+
+            if(board[cell.getX()][cell.getY()] == 1) {
+                return false;
             }
         }
+
+        for (int i = 0; i < shipSize; i++) {
+            List<Cell> llistaPosShip = ship.getPosicionsShip();
+            Cell cell = llistaPosShip.get(i);
+
+            board[cell.getX()][cell.getY()] = 1;
+            return true;
+        }
+        return false;
     }
 
     /**
