@@ -71,13 +71,30 @@ public class Ship {
   public void markHit(final int x, final int y) {
     // Implement logic to mark the ship as hit at the specified coordinates
 
+    //Precondicions
+    assert posicionsShip != null:
+        "La llista del vaixell no pot ser null";
+    assert (x >= 0 && x < 10):
+        "La x ha d'estar dins del tauler";
+
+    assert (y >= 0 && y < 10):
+        "La y ha d'estar dins del tauler";
+
+    Cell c = new Cell(0,0);
     //Marcar cel·la com tocada
     for(Cell cell: posicionsShip){
       if(cell.getX() == x && cell.getY() == y){
         cell.hit();
+        c = cell;
         break;
       }
     }
+
+    //Postcondicions
+    assert (c.getX() == x && c.getY()== y && c.isHit() == true
+        || c.getX() != x && c.getY()!= y && c.isHit() == false ):
+        "La celda no és la correcta";
+
 
   }
 
