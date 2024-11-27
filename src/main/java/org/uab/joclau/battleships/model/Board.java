@@ -39,6 +39,7 @@ public class Board {
      * @return true if a ship was hit, false otherwise
      */
     public boolean takeShot(int x, int y) {
+        /*
         //Validar les coordenades
         if (x < 0 || x > 10 || y < 0 || y > 10){
             return false;
@@ -70,9 +71,11 @@ public class Board {
             System.out.println("Aigua");
             return false;
         }
-
+*/
 
         return false;
+
+
     }
 
     /**
