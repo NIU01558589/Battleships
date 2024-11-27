@@ -472,7 +472,54 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
-  void isAllShipsSunk() {
+  void isAllShipsSunkLimitInterior() {
+    //Tots enfonsats
+    Board board = new Board();
+
+    Ship ship1 = new Ship(List.of(new Cell(0, 0)), 1);
+
+    Ship ship2 = new Ship(List.of(new Cell(5, 1)), 1);
+
+    board.placeShip(ship1, 0, 0, true);
+    board.placeShip(ship2, 5, 1, true);
+
+    board.takeShot(0,0);
+    board.takeShot(5,1);
+
+    assertTrue(board.isAllShipsSunk());
+
+    //Cap enfonsat
+    Board board1 = new Board();
+
+    Ship ship11 = new Ship(List.of(new Cell(0, 0)), 1);
+
+    Ship ship21 = new Ship(List.of(new Cell(5, 1)), 1);
+
+    board.placeShip(ship1, 0, 0, true);
+    board.placeShip(ship2, 5, 1, true);
+
+    assertFalse(board1.isAllShipsSunk());
+  }
+
+  @org.junit.jupiter.api.Test
+  void isAllShipsSunkLimitExterior() {
+    //Cap vaixell
+    Board board = new Board();
+
+    assertFalse(board.isAllShipsSunk());
+  }
+
+  @org.junit.jupiter.api.Test
+  void isAllShipsSunkShipsSenseMesura() {
+    Board board = new Board();
+
+    Ship ship1 = new Ship(List.of(new Cell(0, 0)), 0);
+
+    board.placeShip(ship1, 0, 0, true);
+
+    board.takeShot(0,0);
+
+    assertFalse(board.isAllShipsSunk());
   }
 
   @org.junit.jupiter.api.Test
