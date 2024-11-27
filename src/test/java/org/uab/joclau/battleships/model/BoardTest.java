@@ -392,6 +392,41 @@ class BoardTest {
   @Test
   void takeShotPathCoverage(){
 
+    Board board = new Board();
+
+    //Fora dels límits
+    assertFalse(board.takeShot(-1,-1));
+    assertFalse(board.takeShot(10,10));
+
+    //Ja colpejat
+    //Doble colpejada aigua
+    board.takeShot(5,6);
+    assertFalse(board.takeShot(5,6));
+
+    //Doble colpejada vaixell
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.takeShot(0,0);
+    assertFalse(board.takeShot(0,0));
+
+    //Aigua
+    assertFalse(board.takeShot(4,4));
+
+    //Colpejat vaixell
+    Cell c2 = new Cell(2,2);
+
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    board.placeShip(ship1, 2,2,true);
+    assertTrue(board.takeShot(2,2));
+
+    //No colpejat al vaixell
+    assertFalse(board.takeShot(3,3));
   }
 
   @org.junit.jupiter.api.Test
