@@ -89,6 +89,18 @@ public class Board {
 
     public boolean takeShot(int x, int y) {
 
+        //Precondicions
+        assert board != null:
+            "El tauler no pot ser null";
+        assert board.length == 10 && board[0].length == 10:
+            "El tauler ha de mesurar 10";
+        assert x >= 0 && x <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert y >= 0 && y <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert ships != null:
+            "La llista de vaixes no pot estar buida";
+
         //Validar les coordenades
         if (x < 0 || x > 9 || y < 0 || y > 9){
             return false;
@@ -124,7 +136,8 @@ public class Board {
             return false;
         }
 
-
+        assert board != null:
+            "El tauler no pot ser null";
         return false;
 
 

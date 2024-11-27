@@ -389,6 +389,11 @@ class BoardTest {
     assertTrue(board.takeShot(2,2));
   }
 
+  @Test
+  void takeShotPathCoverage(){
+
+  }
+
   @org.junit.jupiter.api.Test
   void isAllShipsSunk() {
   }
