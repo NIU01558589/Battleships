@@ -107,12 +107,19 @@ public class Ship {
     //Hem de determinar si totes les Cells del vaixell han estat tocades
     for(Cell cell: posicionsShip){
 
+      if(cell.getX() < 0 || cell.getX() > 10
+          || cell.getY() < 0 || cell.getY() > 10){
+        return false;
+      }
+
       //Si una cell del vaixell no s'ha tocat no està enfonsat
       if (cell.isHit() == false){
         return false;
+        //No està enfonsat
       }
     }
     return true;
+    //Està enfonsat
   }
 
   /**
