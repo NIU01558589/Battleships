@@ -154,6 +154,12 @@ public class Board {
      */
     public boolean isAllShipsSunk() {
 
+        //Precondicions
+        assert ships != null:
+            "No pot no haver-hi vaixells";
+        if(ships == null){
+            return false;
+        }
         for(Ship ship: ships){
             //Si algun no està enfonsat
             if(!ship.isSunk()){
