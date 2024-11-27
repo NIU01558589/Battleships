@@ -171,6 +171,22 @@ class ShipTest {
   }
 
   @Test
+  void markHitDecisionCoverage() {
+    Cell c1 = new Cell(3,3);
+    Cell c2 = new Cell(5,6);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    //x és true i y és true
+    ship.markHit(3,3);
+    //x és false i y és false
+    ship.markHit(4,7);
+
+    assertTrue(c1.isHit());
+    assertFalse(c2.isHit());
+  }
+
+  @Test
   void isSunk() {
   }
 }
