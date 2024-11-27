@@ -30,6 +30,10 @@ public class Board {
     public int[][] getBoard() {
         return this.board;
     }
+
+    public List<Ship> getShips() {
+        return this.ships;
+    }
     /**
      * Places a ship on the board.
      *
@@ -85,25 +89,40 @@ public class Board {
      * @param y the y-coordinate of the shot
      * @return true if a ship was hit, false otherwise
      */
+
+
     public boolean takeShot(int x, int y) {
-        /*
+
+        //Precondicions
+        assert board != null:
+            "El tauler no pot ser null";
+        assert board.length == 10 && board[0].length == 10:
+            "El tauler ha de mesurar 10";
+        assert x >= 0 && x <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert y >= 0 && y <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert ships != null:
+            "La llista de vaixes no pot estar buida";
+
         //Validar les coordenades
-        if (x < 0 || x > 10 || y < 0 || y > 10){
+        if (x < 0 || x > 9 || y < 0 || y > 9){
             return false;
         }
 
         //Cell ja golpejada?
-        Cell cell = new Cell(x,y);
-        if (cell.isHit()){
+
+        if (board[x][y] == -1){
             return false;
         }
 
         //Si no ha estat golpejada
         //Marcar com golpejada
-        cell.hit();
-
         //Es golpeja un vaixell?
-        if(cell.isOccupied()){
+        if(board[x][y] == 1){
+            //Marcar el ship com a golpejat
+            board[x][y] = -1;
+
             for(Ship ship: ships){
                 if(ship.isHit(x,y)){
                     //Golpejem el vaixell
@@ -115,11 +134,14 @@ public class Board {
         }else {
 
             //Si no es golpeja un vaixell --> aigua
+            //Aigua = -1
+            board[x][y] = -1;
             System.out.println("Aigua");
             return false;
         }
-*/
 
+        assert board != null:
+            "El tauler no pot ser null";
         return false;
 
 

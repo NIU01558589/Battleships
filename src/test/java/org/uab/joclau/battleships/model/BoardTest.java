@@ -1,5 +1,7 @@
 package org.uab.joclau.battleships.model;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -264,21 +266,209 @@ class BoardTest {
 
   @org.junit.jupiter.api.Test
   void takeShotLimitInterior() {
-    /*
+
+    //Valor 00
     Board board = new Board();
     Cell c1 = new Cell(0,0);
 
     List<Cell> cells = List.of(c1);
     Ship ship = new Ship(cells, cells.size());
 
+    board.placeShip(ship, 0,0,true);
     assertTrue(board.takeShot(0,0));
 
-     */
+    //Valor 9 9
+    Cell c2 = new Cell(9,9);
+
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    board.placeShip(ship1, 9,9,true);
+    assertTrue(board.takeShot(9,9));
+
+    //Valor 5 5
+    Cell c3 = new Cell(5,5);
+
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells.size());
+
+    board.placeShip(ship2, 5,5,true);
+    assertTrue(board.takeShot(5,5));
+
+    //Valor sense vaixell
+    assertFalse(board.takeShot(3,4));
 
   }
 
   @org.junit.jupiter.api.Test
   void takeShotLimitExterior() {
+    //Valor -1
+    Board board = new Board();
+
+    assertFalse(board.takeShot(-1,-1));
+
+    //Valor 9 9
+
+    assertFalse(board.takeShot(10,10));
+  }
+
+  @Test
+  void takeShotJaColpejada(){
+    Board board = new Board();
+
+    //Doble colpejada aigua
+    board.takeShot(5,6);
+    assertFalse(board.takeShot(5,6));
+
+    //Doble colpejada vaixell
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.takeShot(0,0);
+    assertFalse(board.takeShot(0,0));
+
+  }
+
+  @Test
+  void takeShotCellAigua(){
+    Board board = new Board();
+
+    assertFalse(board.takeShot(5,6));
+  }
+
+  @Test
+  void takeShotCellVaixell(){
+    Board board = new Board();
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    assertTrue(board.takeShot(0,0));
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void takeShotStatementCoverage() {
+
+    Board board = new Board();
+
+    //Fora dels límits
+    assertFalse(board.takeShot(-1,-1));
+    assertFalse(board.takeShot(10,10));
+
+    //Ja colpejat
+    //Doble colpejada aigua
+    board.takeShot(5,6);
+    assertFalse(board.takeShot(5,6));
+
+    //Doble colpejada vaixell
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.takeShot(0,0);
+    assertFalse(board.takeShot(0,0));
+
+    //Aigua
+    assertFalse(board.takeShot(4,4));
+
+    //Colpejat vaixell
+    Cell c2 = new Cell(2,2);
+
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    board.placeShip(ship1, 2,2,true);
+    assertTrue(board.takeShot(2,2));
+  }
+
+  @Test
+  void takeShotPathCoverage(){
+
+    Board board = new Board();
+
+    //Fora dels límits
+    assertFalse(board.takeShot(-1,-1));
+    assertFalse(board.takeShot(10,10));
+
+    //Ja colpejat
+    //Doble colpejada aigua
+    board.takeShot(5,6);
+    assertFalse(board.takeShot(5,6));
+
+    //Doble colpejada vaixell
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.takeShot(0,0);
+    assertFalse(board.takeShot(0,0));
+
+    //Aigua
+    assertFalse(board.takeShot(4,4));
+
+    //Colpejat vaixell
+    Cell c2 = new Cell(2,2);
+
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    board.placeShip(ship1, 2,2,true);
+    assertTrue(board.takeShot(2,2));
+
+    //No colpejat al vaixell
+    assertFalse(board.takeShot(3,3));
+  }
+
+  @Test
+  void takeShotSimpleLoop(){
+    Board board = new Board();
+
+    Cell c1 = new Cell(0,0);
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    Cell c2 = new Cell(4,5);
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    Cell c3 = new Cell(8,8);
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells.size());
+
+    Cell c4 = new Cell(6,7);
+    List<Cell> cells3 = List.of(c4);
+    Ship ship3 = new Ship(cells3, cells.size());
+
+    Cell c5 = new Cell(9,9);
+    List<Cell> cells4 = List.of(c5);
+    Ship ship4 = new Ship(cells4, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.placeShip(ship1, 4,5,true);
+    board.placeShip(ship2, 8,8,true);
+    board.placeShip(ship3, 6,7,true);
+    board.placeShip(ship4, 9,9,true);
+
+
+    //Primer valor
+    assertTrue(board.takeShot(0,0));
+    //Segon
+    assertTrue(board.takeShot(4,5));
+    //Penúltim
+    assertTrue(board.takeShot(6,7));
+    //últim
+    assertTrue(board.takeShot(9,9));
+
   }
 
   @org.junit.jupiter.api.Test
