@@ -74,7 +74,7 @@ class BoardTest {
     assertTrue(result);
     assertEquals(1, board.getBoard()[9][9]);
   }
-  // Vaixell Buit TODO: ACABAR
+  // Vaixell Buit
   @org.junit.jupiter.api.Test
   void placeEmptyShipBoard() {
     Board board = new Board();
@@ -85,6 +85,60 @@ class BoardTest {
     boolean result = board.placeShip(ship, 0, 0, true);
 
     assertTrue(result);
+  }
+  // STATEMENT COVERAGE
+  //Limits horizontals erronis per no complir l'if
+  @org.junit.jupiter.api.Test
+  void placeShipBoundHorizontalBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,8), new Cell(0,9), new Cell(0,10));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 8, true);
+
+    assertFalse(result);
+  }
+  //Limits verticals erronis per no complir l'if
+  @org.junit.jupiter.api.Test
+  void placeShipBoundVerticalBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(8,0), new Cell(9,0), new Cell(10,0));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 8, 0, false);
+
+    assertFalse(result);
+  }
+  // Cel·les ocupada
+  @org.junit.jupiter.api.Test
+  void placeShipOccupiedCellsBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    List<Cell> shipCells1 = List.of(new Cell(0,1), new Cell(0,2), new Cell(0,3));
+    Ship ship1 = new Ship(shipCells1, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    boolean result1 = board.placeShip(ship1, 0,1,true);
+    assertFalse(result1);
+  }
+  // Introduïm cel·les
+  @org.junit.jupiter.api.Test
+  void placeShipSuccessBoard() {
+    Board board = new Board();
+
+    List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+    Ship ship = new Ship(shipCells, shipCells.size());
+
+    boolean result = board.placeShip(ship, 0, 0, true);
+    assertTrue(result);
+    assertEquals(1, board.getBoard()[0][0]);
+    assertEquals(1, board.getBoard()[0][1]);
+    assertEquals(1, board.getBoard()[0][2]);
   }
   @org.junit.jupiter.api.Test
   void takeShot() {

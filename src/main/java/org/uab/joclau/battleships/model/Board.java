@@ -57,7 +57,7 @@ public class Board {
                 return false;
             }
         }
-
+        // Afegir el vaixell
         for (int i = 0; i < shipSize; i++) {
             Cell cell = llistaPosShip.get(i);
             board[cell.getX()][cell.getY()] = 1;
