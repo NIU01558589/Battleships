@@ -42,9 +42,10 @@ public class Board {
     public boolean placeShip(Ship ship, int x,
                           int y, boolean isHorizontal) {
         //Precondicions
-        assert ship != null : "El vaixell no pot ser nul";
+        assert ship != null : "El vaixell no pot ser null";
         assert ship.getTamany() > 0 : "Tamany del vaixell positiu";
-        assert x >= 0 && y >= 0 : "Coordenades dins de"
+        assert x >= 0 && y >= 0 : "Coordenades dins de rang";
+
         int shipSize = ship.getTamany();
         // Validar que el vaixell no surti dels límits
         if((isHorizontal && (y + shipSize > board[0].length))
@@ -68,8 +69,10 @@ public class Board {
             board[cell.getX()][cell.getY()] = 1;
         }
 
-        // Añadir barco a la lista de barcos
+        // Afegir vaixell a la llista de vaixells
         ships.add(ship);
+
+        assert ships.contains(ship) : "El vaixell no ha estat afegir correctament";
 
         // Cas existós
         return true;
