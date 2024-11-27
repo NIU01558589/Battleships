@@ -472,7 +472,12 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
-  void isAllShipsSunk() {
+  void isAllShipsSunkLimitInterior() {
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void isAllShipsSunkLimitExterior() {
   }
 
   @org.junit.jupiter.api.Test

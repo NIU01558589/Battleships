@@ -153,7 +153,14 @@ public class Board {
      * @return true if all ships are sunk, false otherwise
      */
     public boolean isAllShipsSunk() {
-        return false;
+
+        for(Ship ship: ships){
+            //Si algun no està enfonsat
+            if(!ship.isSunk()){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
