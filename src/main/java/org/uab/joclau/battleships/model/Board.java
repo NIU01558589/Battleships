@@ -157,7 +157,7 @@ public class Board {
         //Precondicions
         assert ships != null:
             "No pot no haver-hi vaixells";
-        if(ships == null){
+        if(ships.isEmpty()){
             return false;
         }
         for(Ship ship: ships){
