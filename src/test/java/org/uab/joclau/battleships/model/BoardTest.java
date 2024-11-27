@@ -7,19 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
   @org.junit.jupiter.api.Test
-  void placeShip() {
-      Board board = new Board();
-      int[][] gridGame = new int[10][10];
-      board.setBoard(gridGame);
-
-      List<Cell> shipCells = List.of(new Cell(0,0), new Cell(0,1), new Cell(0,2));
+  void placeShipValidSituation() {
+    Board board = new Board();
+      List<Cell> shipCells = List.of(new Cell(1,2), new Cell(1,3), new Cell(1,4));
       Ship ship = new Ship(shipCells, shipCells.size());
 
-      boolean result = board.placeShip(ship, 0, 0, true);
+      boolean result = board.placeShip(ship, 1, 2, true);
 
-      assertEquals(1, board.getBoard()[0][0]);
-      assertEquals(1, board.getBoard()[0][1]);
-      assertEquals(1, board.getBoard()[0][2]);
+      assertEquals(1, board.getBoard()[1][2]);
+      assertEquals(1, board.getBoard()[1][3]);
+      assertEquals(1, board.getBoard()[1][4]);
   }
 
   @org.junit.jupiter.api.Test

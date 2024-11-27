@@ -1,5 +1,6 @@
 package org.uab.joclau.battleships.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,11 @@ public class Board {
      * All the ships in the game.
      */
     private List<Ship> ships;
+
+    public Board() {
+        this.board = new int[10][10];
+        this.ships = new ArrayList<Ship>();
+    }
 
     public void setBoard(int[][] boardInput) {
         this.board = boardInput;
@@ -39,28 +45,29 @@ public class Board {
 
         // Validar que el vaixell no surti dels límits
         if((isHorizontal && (y + shipSize > board[0].length))
-                &&(!isHorizontal &&(x+shipSize > board.length))) {
+                ||(!isHorizontal &&(x+shipSize > board.length))) {
             return false;
         }
 
         // Validar que les cel·les no estiguin ocupades
+        List<Cell> llistaPosShip = ship.getPosicionsShip();
         for (int i = 0; i < shipSize; i++) {
-            List<Cell> llistaPosShip = ship.getPosicionsShip();
             Cell cell = llistaPosShip.get(i);
-
             if(board[cell.getX()][cell.getY()] == 1) {
                 return false;
             }
         }
 
         for (int i = 0; i < shipSize; i++) {
-            List<Cell> llistaPosShip = ship.getPosicionsShip();
             Cell cell = llistaPosShip.get(i);
-
             board[cell.getX()][cell.getY()] = 1;
-            return true;
         }
-        return false;
+
+        // Añadir barco a la lista de barcos
+        ships.add(ship);
+
+        // Cas existós
+        return true;
     }
 
     /**
