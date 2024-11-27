@@ -187,6 +187,225 @@ class ShipTest {
   }
 
   @Test
-  void isSunk() {
+  void isSunkLimitInterior() {
+    //CAS QUE VAIXELL ENFONSAT
+    Cell c1 = new Cell(3,3);
+    Cell c2 = new Cell(3,4);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertTrue(ship.isSunk());
+
+    //CAS QUE VAIXELL NO ENFONSAT
+    Cell c3 = new Cell(3,3);
+    Cell c4 = new Cell(3,4);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+
+    assertFalse(ship1.isSunk());
+
   }
+
+  @Test
+  void isSunkLimitExterior() {
+
+    //NEGATIUS X
+    Cell c1 = new Cell(-3,3);
+    Cell c2 = new Cell(-3,4);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertFalse(ship.isSunk());
+
+    //NEGATIUS Y
+    Cell c11 = new Cell(3,-3);
+    Cell c21 = new Cell(3,-4);
+    List<Cell> cells11 = List.of(c11, c21);
+    Ship ship11 = new Ship(cells11, cells11.size());
+
+    ship.markHit(c11.getX(), c11.getY());
+
+    ship.markHit(c21.getX(), c21.getY());
+
+    assertFalse(ship11.isSunk());
+
+    //MÉS GRANS QUE BOARD Y
+    Cell c3 = new Cell(3,11);
+    Cell c4 = new Cell(3,12);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+    ship1.markHit(c4.getX(), c4.getY());
+
+    assertFalse(ship1.isSunk());
+
+    //MÉS GRANS QUE BOARD X
+    Cell c32 = new Cell(14,1);
+    Cell c42 = new Cell(22,1);
+    List<Cell> cells12 = List.of(c3, c4);
+    Ship ship12 = new Ship(cells12, cells12.size());
+
+    ship1.markHit(c32.getX(), c32.getY());
+    ship1.markHit(c42.getX(), c42.getY());
+
+    assertFalse(ship12.isSunk());
+  }
+
+  @Test
+  void isSunkStatementCoverage() {
+
+    //CAS 1: VAIXELL COMPLETAMENT ENFONSAT
+    Cell c1 = new Cell(2,3);
+    Cell c2 = new Cell(3,3);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertTrue(ship.isSunk());
+
+    //CAS 2: VAIXELL PARCIALMENT ENFONSAT
+    Cell c3 = new Cell(3,3);
+    Cell c4 = new Cell(3,4);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+
+    assertFalse(ship1.isSunk());
+
+    //CAS 3: VAIXELL SENSE TOCAR
+    Cell c5 = new Cell (3,5);
+    List<Cell> cell5 = List.of(c4,c5);
+    Ship ship5 = new Ship(cell5, cell5.size());
+
+    assertFalse(ship5.isSunk());
+
+    //CAS 4: VAIXELL AMB UNA CELL ENFONSAT
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells2.size());
+    assertTrue(ship2.isSunk());
+
+    //CAS 5: VAIXELL AMB UNA CELL NO ENFONSAT
+    List<Cell> cells3 = List.of(c4);
+    Ship ship3 = new Ship(cells3, cells2.size());
+    assertFalse(ship3.isSunk());
+
+    //CAS 6: VAIXELL EMPTY
+    Ship ship25 = new Ship(Collections.emptyList(),0);
+
+    //Hem de comprovar que la llista es buida amb la funció isEmpty
+    assertTrue(ship25.getPosicionsShip().isEmpty());
+    assertFalse(ship25.isSunk());
+
+  }
+
+  @Test
+  void isSunkDecisionCoverage(){
+
+    // 1r IF TRUE
+    Ship ship25 = new Ship(Collections.emptyList(),0);
+
+    //Hem de comprovar que la llista es buida amb la funció isEmpty
+    assertTrue(ship25.getPosicionsShip().isEmpty());
+    assertFalse(ship25.isSunk());
+
+    //1R IF FALSE 2N IF TRUE
+    Cell c1 = new Cell(-3,3);
+    Cell c2 = new Cell(-3,4);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertFalse(ship.isSunk());
+
+    //1R IF FALSE 2N IF FALSE 3R IF FALSE
+    Cell c3 = new Cell(3,3);
+    Cell c4 = new Cell(3,4);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+
+    assertFalse(ship1.isSunk());
+
+    //1R IF TRUE 2N IF TRUE 3R IF TRUE
+    Cell c11 = new Cell(2,3);
+    Cell c21 = new Cell(3,3);
+    List<Cell> cells11 = List.of(c11, c21);
+    Ship ship11 = new Ship(cells11, cells11.size());
+
+    ship11.markHit(c11.getX(), c11.getY());
+
+    ship11.markHit(c21.getX(), c21.getY());
+
+    assertTrue(ship11.isSunk());
+
+  }
+
+  @Test
+  void isSunkConditionCoverage(){
+
+    // 1r IF TRUE
+    Ship ship25 = new Ship(Collections.emptyList(),0);
+
+    //Hem de comprovar que la llista es buida amb la funció isEmpty
+    assertTrue(ship25.getPosicionsShip().isEmpty());
+    assertFalse(ship25.isSunk());
+
+    //1R IF FALSE 2N IF TRUE
+    Cell c1 = new Cell(-3,3);
+    Cell c2 = new Cell(-3,4);
+    List<Cell> cells = List.of(c1, c2);
+    Ship ship = new Ship(cells, cells.size());
+
+    ship.markHit(c1.getX(), c1.getY());
+
+    ship.markHit(c2.getX(), c2.getY());
+
+    assertFalse(ship.isSunk());
+
+    //1R IF FALSE 2N IF FALSE 3R IF TRUE
+    Cell c3 = new Cell(3,3);
+    Cell c4 = new Cell(3,4);
+    List<Cell> cells1 = List.of(c3, c4);
+    Ship ship1 = new Ship(cells1, cells1.size());
+
+    ship1.markHit(c3.getX(), c3.getY());
+
+    assertFalse(ship1.isSunk());
+
+    //1R IF TRUE 2N IF TRUE 3R IF TRUE
+    Cell c11 = new Cell(2,3);
+    Cell c21 = new Cell(3,3);
+    List<Cell> cells11 = List.of(c11, c21);
+    Ship ship11 = new Ship(cells11, cells11.size());
+
+    ship11.markHit(c11.getX(), c11.getY());
+
+    ship11.markHit(c21.getX(), c21.getY());
+
+    assertTrue(ship11.isSunk());
+
+  }
+
+
 }
+
