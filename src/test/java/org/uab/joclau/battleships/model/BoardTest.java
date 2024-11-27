@@ -510,6 +510,19 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
+  void isAllShipsSunkShipsSenseMesura() {
+    Board board = new Board();
+
+    Ship ship1 = new Ship(List.of(new Cell(0, 0)), 0);
+
+    board.placeShip(ship1, 0, 0, true);
+
+    board.takeShot(0,0);
+
+    assertFalse(board.isAllShipsSunk());
+  }
+
+  @org.junit.jupiter.api.Test
   void isValidPlacement() {
   }
 
