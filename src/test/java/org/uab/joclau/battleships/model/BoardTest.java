@@ -261,8 +261,24 @@ class BoardTest {
     assertTrue(board.getBoard()[0][2] == 1);
     assertTrue(result);
   }
+
   @org.junit.jupiter.api.Test
-  void takeShot() {
+  void takeShotLimitInterior() {
+    /*
+    Board board = new Board();
+    Cell c1 = new Cell(0,0);
+
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    assertTrue(board.takeShot(0,0));
+
+     */
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void takeShotLimitExterior() {
   }
 
   @org.junit.jupiter.api.Test

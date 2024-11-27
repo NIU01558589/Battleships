@@ -86,7 +86,43 @@ public class Board {
      * @return true if a ship was hit, false otherwise
      */
     public boolean takeShot(int x, int y) {
+        /*
+        //Validar les coordenades
+        if (x < 0 || x > 10 || y < 0 || y > 10){
+            return false;
+        }
+
+        //Cell ja golpejada?
+        Cell cell = new Cell(x,y);
+        if (cell.isHit()){
+            return false;
+        }
+
+        //Si no ha estat golpejada
+        //Marcar com golpejada
+        cell.hit();
+
+        //Es golpeja un vaixell?
+        if(cell.isOccupied()){
+            for(Ship ship: ships){
+                if(ship.isHit(x,y)){
+                    //Golpejem el vaixell
+                    ship.markHit(x,y);
+                    System.out.println("Vaixell tocat");
+                    return true;
+                }
+            }
+        }else {
+
+            //Si no es golpeja un vaixell --> aigua
+            System.out.println("Aigua");
+            return false;
+        }
+*/
+
         return false;
+
+
     }
 
     /**

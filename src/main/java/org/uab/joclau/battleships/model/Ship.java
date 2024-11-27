@@ -104,7 +104,38 @@ public class Ship {
    * @return true if the ship is sunk, false otherwise.
    */
   public boolean isSunk() {
-    return false;  // Implement logic to check if the ship is sunk
+    //Hem de determinar si totes les Cells del vaixell han estat tocades
+
+    Boolean isHit = true;
+    //Precondicions
+    assert posicionsShip.isEmpty()==false:
+      "La llista de cel·les no pot esta buida";
+    assert posicionsShip.size() > 10:
+        "Un vaixell no pot ser més gran que el taulell";
+    if(posicionsShip.isEmpty()){
+      return false;
+    }
+    for(Cell cell: posicionsShip){
+
+      if(cell.getX() < 0 || cell.getX() > 10
+          || cell.getY() < 0 || cell.getY() > 10){
+        return false;
+      }
+
+      //Si una cell del vaixell no s'ha tocat no està enfonsat
+      if (cell.isHit() == false){
+        isHit = false;
+        return false;
+        //No està enfonsat
+      }
+    }
+    //Postcondicions
+    assert isHit == true:
+        "Vaixell enfonsat, totes les ce·les golpejades";
+    assert isHit ==false:
+        "Vaixell no enfonsat, no totes les cel·les golpejades";
+    return true;
+    //Està enfonsat
   }
 
   /**
