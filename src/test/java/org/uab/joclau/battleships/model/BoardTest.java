@@ -429,6 +429,48 @@ class BoardTest {
     assertFalse(board.takeShot(3,3));
   }
 
+  @Test
+  void takeShotSimpleLoop(){
+    Board board = new Board();
+
+    Cell c1 = new Cell(0,0);
+    List<Cell> cells = List.of(c1);
+    Ship ship = new Ship(cells, cells.size());
+
+    Cell c2 = new Cell(4,5);
+    List<Cell> cells1 = List.of(c2);
+    Ship ship1 = new Ship(cells1, cells.size());
+
+    Cell c3 = new Cell(8,8);
+    List<Cell> cells2 = List.of(c3);
+    Ship ship2 = new Ship(cells2, cells.size());
+
+    Cell c4 = new Cell(6,7);
+    List<Cell> cells3 = List.of(c4);
+    Ship ship3 = new Ship(cells3, cells.size());
+
+    Cell c5 = new Cell(9,9);
+    List<Cell> cells4 = List.of(c5);
+    Ship ship4 = new Ship(cells4, cells.size());
+
+    board.placeShip(ship, 0,0,true);
+    board.placeShip(ship1, 4,5,true);
+    board.placeShip(ship2, 8,8,true);
+    board.placeShip(ship3, 6,7,true);
+    board.placeShip(ship4, 9,9,true);
+
+
+    //Primer valor
+    assertTrue(board.takeShot(0,0));
+    //Segon
+    assertTrue(board.takeShot(4,5));
+    //Penúltim
+    assertTrue(board.takeShot(6,7));
+    //últim
+    assertTrue(board.takeShot(9,9));
+
+  }
+
   @org.junit.jupiter.api.Test
   void isAllShipsSunk() {
   }

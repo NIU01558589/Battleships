@@ -30,6 +30,10 @@ public class Board {
     public int[][] getBoard() {
         return this.board;
     }
+
+    public List<Ship> getShips() {
+        return this.ships;
+    }
     /**
      * Places a ship on the board.
      *
