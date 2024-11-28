@@ -180,7 +180,41 @@ public class Board {
      */
     public boolean isValidPlacement(Ship ship, int x,
                                     int y, boolean isHorizontal) {
-        return isHorizontal;
+        //El vaixell no es null
+        if(ship == null){
+            return false;
+        }
+
+        //verificar coordenades
+        if(x < 0 || x > 9 || y < 0 || y > 9 ){
+            return false;
+        }
+        //Obtenir tamany vaixell
+        int shipSize = ship.getTamany();
+
+        //verificar que el vaixell no surti
+        if (isHorizontal) {
+            if (y + shipSize > board[0].length) {
+                return false;
+            }
+        } else {
+            if (x + shipSize > board.length) {
+                return false;
+            }
+        }
+
+        //verificar cells lliures
+        for (int i = 0; i < shipSize; i++) {
+            int cellX = x + (isHorizontal ? 0 : i);
+            int cellY = y + (isHorizontal ? i : 0);
+
+            if (board[cellX][cellY] != 0) {
+                return false;
+            }
+        }
+
+        return true;
+
     }
 
     /**
