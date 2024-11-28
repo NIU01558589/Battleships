@@ -94,8 +94,6 @@ public class Ship {
     assert (c.getX() == x && c.getY()== y && c.isHit() == true
         || c.getX() != x && c.getY()!= y && c.isHit() == false ):
         "La celda no és la correcta";
-
-
   }
 
   /**
