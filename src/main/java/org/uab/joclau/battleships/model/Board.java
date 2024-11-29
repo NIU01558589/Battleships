@@ -186,7 +186,7 @@ public class Board {
         }
 
         //verificar coordenades
-        if(x < 0 || x > 9 || y < 0 || y > 9 ){
+        if (x < 0 || x > 9 || y < 0 || y > 9){
             return false;
         }
         //Obtenir tamany vaixell
@@ -194,23 +194,43 @@ public class Board {
 
         //verificar que el vaixell no surti
         if (isHorizontal) {
-            if (y + shipSize > board[0].length) {
+            if (x + shipSize  > board[0].length ) {
                 return false;
             }
         } else {
-            if (x + shipSize > board.length) {
+            if (y + shipSize  > board.length  ) {
                 return false;
             }
         }
 
-        //verificar cells lliures
-        for (int i = 0; i < shipSize; i++) {
-            int cellX = x + (isHorizontal ? 0 : i);
-            int cellY = y + (isHorizontal ? i : 0);
+        int rowLimit = 0;
+        int colLimit = 0;
 
-            if (board[cellX][cellY] != 0) {
-                return false;
+        if(isHorizontal){
+
+            rowLimit = shipSize;
+            colLimit = 1;
+
+        }else{
+
+            rowLimit = 1;
+            colLimit = shipSize;
+        }
+
+        //verificar cells lliures
+        for (int row = x; row < x + rowLimit; row++) {
+            for(int col = y; col < y + colLimit; col++){
+
+                if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+                    return false;
+                }
+
+                if(board[row][col] != 0){
+                    return false;
+                }
+
             }
+
         }
 
         return true;
