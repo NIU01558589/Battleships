@@ -256,6 +256,6 @@ public class Board {
      * @return true if the game is over, false otherwise
      */
     public boolean isGameOver() {
-        return false;
+        return isAllShipsSunk();
     }
 }
