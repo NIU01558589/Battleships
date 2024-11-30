@@ -587,6 +587,42 @@ class BoardTest {
 
   }
 
+  //LOOP TESTING
+  //Testing loop intern
+  @org.junit.jupiter.api.Test
+  void isValidPlacementInnerLoop() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(1,0))), 1);
+    Ship ship1 = new Ship(List.of((new Cell(1,1))), 1);
+    Ship ship2 = new Ship(List.of((new Cell(1,8))), 1);
+    Ship ship3 = new Ship(List.of((new Cell(1,9))), 1);
+
+    assertTrue(board.isValidPlacement(ship, 1, 0, false));
+    assertTrue(board.isValidPlacement(ship1, 1, 1, false));
+    assertTrue(board.isValidPlacement(ship2, 1, 8, false));
+    assertTrue(board.isValidPlacement(ship3, 1, 9, false));
+
+  }
+  //Testing loop extern
+  @org.junit.jupiter.api.Test
+  void isValidPlacementOuterLoop() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,5))), 1);
+    Ship ship1 = new Ship(List.of((new Cell(1,5))), 1);
+    Ship ship2 = new Ship(List.of((new Cell(8,5))), 1);
+    Ship ship3 = new Ship(List.of((new Cell(9,5))), 1);
+
+    assertTrue(board.isValidPlacement(ship, 0, 5, false));
+    assertTrue(board.isValidPlacement(ship1, 1, 5, false));
+    assertTrue(board.isValidPlacement(ship2, 8, 5, false));
+    assertTrue(board.isValidPlacement(ship3, 9, 5, false));
+
+  }
+
 
 
   @org.junit.jupiter.api.Test
