@@ -180,6 +180,19 @@ public class Board {
      */
     public boolean isValidPlacement(Ship ship, int x,
                                     int y, boolean isHorizontal) {
+
+        //Precondicions
+        assert ship != null:
+            "El vaixell no pot ser null";
+        assert board.length == 10 && board[0].length == 10:
+            "El tauler ha de mesurar 10";
+        assert x >= 0 && x <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert y >= 0 && y <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert ship.getTamany() <= 0:
+            "El tamany del vaixell ha de ser més gran que 0";
+
         //El vaixell no es null
         if(ship == null){
             return false;
