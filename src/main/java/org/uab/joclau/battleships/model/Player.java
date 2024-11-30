@@ -10,12 +10,19 @@ public class Player {
    * The player's game board.
    */
   private Board board;
+  private String name;
+  private int turnsTaken;
 
   /**
    * Places the player's ships on the board.
    */
-  public void placeShips() {
-    // Implement ship placement logic
+  public Player(String name) {
+    this.name = name;
+    this.turnsTaken = 0;
+    this.board = new Board();
+  }
+  public boolean placeShips(Ship ship, int x, int y, boolean isHorizontal) {
+    return board.placeShip(ship, x, y, isHorizontal);
   }
 
   /**
@@ -24,8 +31,8 @@ public class Player {
    * @param opponent the opponent player.
    * @return true if the turn was successfully completed, false otherwise.
    */
-  public boolean takeTurn(final Player opponent) {
-    return false;  // Implement turn-taking logic
+  public boolean takeTurn(final Player opponent, int x, int y) {
+    return opponent.getBoardPlayer().takeShot(x,y);
   }
 
   /**
@@ -42,7 +49,7 @@ public class Player {
    *
    * @return the player's board.
    */
-  public Board getBoard() {
+  public Board getBoardPlayer() {
     return board;
   }
 }

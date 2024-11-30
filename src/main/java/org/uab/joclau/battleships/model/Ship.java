@@ -94,8 +94,6 @@ public class Ship {
     assert (c.getX() == x && c.getY()== y && c.isHit() == true
         || c.getX() != x && c.getY()!= y && c.isHit() == false ):
         "La celda no és la correcta";
-
-
   }
 
   /**
@@ -118,7 +116,7 @@ public class Ship {
     for(Cell cell: posicionsShip){
 
       if(cell.getX() < 0 || cell.getX() > 10
-          || cell.getY() < 0 || cell.getY() > 10){
+              || cell.getY() < 0 || cell.getY() > 10){
         return false;
       }
 
