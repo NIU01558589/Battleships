@@ -573,6 +573,20 @@ class BoardTest {
 
   }
 
+  @org.junit.jupiter.api.Test
+  void isValidPlacementCoordenadesValides() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    Ship ship1 = new Ship(List.of((new Cell(1,2)),(new Cell(1,3))), 2);
+
+    board.placeShip(ship, 0, 2, false);
+    assertTrue(board.isValidPlacement(ship1, 1, 2, false));
+
+  }
+
 
 
   @org.junit.jupiter.api.Test
