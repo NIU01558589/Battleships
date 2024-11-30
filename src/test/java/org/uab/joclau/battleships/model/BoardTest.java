@@ -623,6 +623,20 @@ class BoardTest {
 
   }
 
+  @org.junit.jupiter.api.Test
+  void isValidPlacementLimitExterior2() {
+
+    Board board = new Board();
+    //VERTICAL
+    Ship ship = new Ship(List.of((new Cell(9,9)),(new Cell(10,9))), 2);
+
+    //HORITZONTAL
+    Ship ship1 = new Ship(List.of((new Cell(-1,0)),(new Cell(-2,0))), 2);
+
+    assertFalse(board.isValidPlacement(ship, 9, 9, false));
+    assertFalse(board.isValidPlacement(ship1, 0, -1, true));
+  }
+
 
 
   @org.junit.jupiter.api.Test
