@@ -552,6 +552,30 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
+  void isValidPlacementNullShip() {
+
+    Board board = new Board();
+    assertFalse(board.isValidPlacement(null, 0, 0, false));
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementCellJaOcupadaVaixell() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    Ship ship1 = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    board.placeShip(ship, 0, 2, false);
+    assertFalse(board.isValidPlacement(ship1, 0, 2, false));
+
+  }
+
+
+
+  @org.junit.jupiter.api.Test
   void isGameOver() {
   }
 }
