@@ -180,7 +180,74 @@ public class Board {
      */
     public boolean isValidPlacement(Ship ship, int x,
                                     int y, boolean isHorizontal) {
-        return isHorizontal;
+
+        //Precondicions
+        assert ship != null:
+            "El vaixell no pot ser null";
+        assert board.length == 10 && board[0].length == 10:
+            "El tauler ha de mesurar 10";
+        assert x >= 0 && x <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert y >= 0 && y <= 9:
+            "Les coodenades han d'estar dins del rang";
+        assert ship.getTamany() <= 0:
+            "El tamany del vaixell ha de ser més gran que 0";
+
+        //El vaixell no es null
+        if(ship == null){
+            return false;
+        }
+
+        //verificar coordenades
+        if (x < 0 || x > 9 || y < 0 || y > 9){
+            return false;
+        }
+        //Obtenir tamany vaixell
+        int shipSize = ship.getTamany();
+
+        //verificar que el vaixell no surti
+        if (isHorizontal) {
+            if (x + shipSize  > board[0].length ) {
+                return false;
+            }
+        } else {
+            if (y + shipSize  > board.length  ) {
+                return false;
+            }
+        }
+
+        int rowLimit = 0;
+        int colLimit = 0;
+
+        if(isHorizontal){
+
+            rowLimit = shipSize;
+            colLimit = 1;
+
+        }else{
+
+            rowLimit = 1;
+            colLimit = shipSize;
+        }
+
+        //verificar cells lliures
+        for (int row = x; row < x + rowLimit; row++) {
+            for(int col = y; col < y + colLimit; col++){
+
+                if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+                    return false;
+                }
+
+                if(board[row][col] != 0){
+                    return false;
+                }
+
+            }
+
+        }
+
+        return true;
+
     }
 
     /**

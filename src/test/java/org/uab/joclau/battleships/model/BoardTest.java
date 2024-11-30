@@ -523,8 +523,121 @@ class BoardTest {
   }
 
   @org.junit.jupiter.api.Test
-  void isValidPlacement() {
+  void isValidPlacementLimitInterior() {
+
+    Board board = new Board();
+    //VERTICAL
+    Ship ship = new Ship(List.of((new Cell(9,8)),(new Cell(9,9))), 2);
+
+    //HORITZONTAL
+    Ship ship1 = new Ship(List.of((new Cell(0,0)),(new Cell(0,1))), 2);
+
+    assertTrue(board.isValidPlacement(ship, 9, 8, false));
+    assertTrue(board.isValidPlacement(ship1, 0, 0, true));
+
   }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementLimitExterior() {
+
+    Board board = new Board();
+    //VERTICAL
+    Ship ship = new Ship(List.of((new Cell(9,9)),(new Cell(9,10))), 2);
+
+    //HORITZONTAL
+    Ship ship1 = new Ship(List.of((new Cell(0,-1)),(new Cell(0,-2))), 2);
+
+    assertFalse(board.isValidPlacement(ship, 9, 9, false));
+    assertFalse(board.isValidPlacement(ship1, 0, -1, true));
+  }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementNullShip() {
+
+    Board board = new Board();
+    assertFalse(board.isValidPlacement(null, 0, 0, false));
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementCellJaOcupadaVaixell() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    Ship ship1 = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    board.placeShip(ship, 0, 2, false);
+    assertFalse(board.isValidPlacement(ship1, 0, 2, false));
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementCoordenadesValides() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,2)),(new Cell(0,3))), 2);
+
+    Ship ship1 = new Ship(List.of((new Cell(1,2)),(new Cell(1,3))), 2);
+
+    board.placeShip(ship, 0, 2, false);
+    assertTrue(board.isValidPlacement(ship1, 1, 2, false));
+
+  }
+
+  //LOOP TESTING
+  //Testing loop intern
+  @org.junit.jupiter.api.Test
+  void isValidPlacementInnerLoop() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(1,0))), 1);
+    Ship ship1 = new Ship(List.of((new Cell(1,1))), 1);
+    Ship ship2 = new Ship(List.of((new Cell(1,8))), 1);
+    Ship ship3 = new Ship(List.of((new Cell(1,9))), 1);
+
+    assertTrue(board.isValidPlacement(ship, 1, 0, false));
+    assertTrue(board.isValidPlacement(ship1, 1, 1, false));
+    assertTrue(board.isValidPlacement(ship2, 1, 8, false));
+    assertTrue(board.isValidPlacement(ship3, 1, 9, false));
+
+  }
+  //Testing loop extern
+  @org.junit.jupiter.api.Test
+  void isValidPlacementOuterLoop() {
+
+    Board board = new Board();
+
+    Ship ship = new Ship(List.of((new Cell(0,5))), 1);
+    Ship ship1 = new Ship(List.of((new Cell(1,5))), 1);
+    Ship ship2 = new Ship(List.of((new Cell(8,5))), 1);
+    Ship ship3 = new Ship(List.of((new Cell(9,5))), 1);
+
+    assertTrue(board.isValidPlacement(ship, 0, 5, false));
+    assertTrue(board.isValidPlacement(ship1, 1, 5, false));
+    assertTrue(board.isValidPlacement(ship2, 8, 5, false));
+    assertTrue(board.isValidPlacement(ship3, 9, 5, false));
+
+  }
+
+  @org.junit.jupiter.api.Test
+  void isValidPlacementLimitExterior2() {
+
+    Board board = new Board();
+    //VERTICAL
+    Ship ship = new Ship(List.of((new Cell(9,9)),(new Cell(10,9))), 2);
+
+    //HORITZONTAL
+    Ship ship1 = new Ship(List.of((new Cell(-1,0)),(new Cell(-2,0))), 2);
+
+    assertFalse(board.isValidPlacement(ship, 9, 9, false));
+    assertFalse(board.isValidPlacement(ship1, 0, -1, true));
+  }
+
+
 
   @org.junit.jupiter.api.Test
   void isGameOver() {
