@@ -387,6 +387,14 @@ class BoardTest {
 
     board.placeShip(ship1, 2,2,true);
     assertTrue(board.takeShot(2,2));
+
+    //Cap vaixell a la posicio i no s'ha colpejat abans la cell
+    Cell c3 = new Cell(5,5);
+    List<Cell> cells2 = List.of(c1);
+    Ship ship2 = new Ship(cells2, cells2.size());
+    board.placeShip(ship2,5,5,true);
+
+    assertFalse(board.takeShot(6,6));
   }
 
   @Test

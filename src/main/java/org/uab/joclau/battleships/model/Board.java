@@ -110,10 +110,11 @@ public class Board {
             return false;
         }
 
+        boolean res = false;
         //Cell ja golpejada?
 
         if (board[x][y] == -1){
-            return false;
+            res = false;
         }
 
         //Si no ha estat golpejada
@@ -128,21 +129,21 @@ public class Board {
                     //Golpejem el vaixell
                     ship.markHit(x,y);
                     System.out.println("Vaixell tocat");
-                    return true;
+                    res = true;
                 }
             }
-        }else {
+        } else {
 
             //Si no es golpeja un vaixell --> aigua
             //Aigua = -1
             board[x][y] = -1;
             System.out.println("Aigua");
-            return false;
+            res = false;
         }
 
         assert board != null:
             "El tauler no pot ser null";
-        return false;
+        return res;
 
 
     }
@@ -205,22 +206,9 @@ public class Board {
         //Obtenir tamany vaixell
         int shipSize = ship.getTamany();
 
-        //verificar que el vaixell no surti
-        if (isHorizontal) {
-            if (x + shipSize  > board[0].length ) {
-                return false;
-            }
-        } else {
-            if (y + shipSize  > board.length  ) {
-                return false;
-            }
-        }
-
         int rowLimit = 0;
         int colLimit = 0;
-
         if(isHorizontal){
-
             rowLimit = shipSize;
             colLimit = 1;
 
