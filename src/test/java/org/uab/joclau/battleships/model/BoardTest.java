@@ -638,8 +638,4 @@ class BoardTest {
   }
 
 
-
-  @org.junit.jupiter.api.Test
-  void isGameOver() {
-  }
 }
