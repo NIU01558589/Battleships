@@ -307,11 +307,14 @@ class ShipTest {
 
     //CAS 6: VAIXELL EMPTY
     Ship ship25 = new Ship(Collections.emptyList(),0);
-
     //Hem de comprovar que la llista es buida amb la funció isEmpty
     assertTrue(ship25.getPosicionsShip().isEmpty());
     assertFalse(ship25.isSunk());
 
+    //CAS 7: VAIXELL FORA DE POSICIO
+    List<Cell> cells5 = List.of(new Cell(12,12), new Cell(6,6));
+    Ship ship6 = new Ship(cells5, cells5.size());
+    assertFalse(ship6.isSunk());
   }
 
   @Test
@@ -326,12 +329,11 @@ class ShipTest {
 
     //1R IF FALSE 2N IF TRUE
     Cell c1 = new Cell(-3,3);
-    Cell c2 = new Cell(-3,4);
+    Cell c2 = new Cell(3,-4);
     List<Cell> cells = List.of(c1, c2);
     Ship ship = new Ship(cells, cells.size());
 
     ship.markHit(c1.getX(), c1.getY());
-
     ship.markHit(c2.getX(), c2.getY());
 
     assertFalse(ship.isSunk());
@@ -372,7 +374,7 @@ class ShipTest {
 
     //1R IF FALSE 2N IF TRUE
     Cell c1 = new Cell(-3,3);
-    Cell c2 = new Cell(-3,4);
+    Cell c2 = new Cell(3,-4);
     List<Cell> cells = List.of(c1, c2);
     Ship ship = new Ship(cells, cells.size());
 
@@ -384,7 +386,7 @@ class ShipTest {
 
     //1R IF FALSE 2N IF FALSE 3R IF TRUE
     Cell c3 = new Cell(3,3);
-    Cell c4 = new Cell(3,4);
+    Cell c4 = new Cell(3,10);
     List<Cell> cells1 = List.of(c3, c4);
     Ship ship1 = new Ship(cells1, cells1.size());
 
@@ -394,7 +396,7 @@ class ShipTest {
 
     //1R IF TRUE 2N IF TRUE 3R IF TRUE
     Cell c11 = new Cell(2,3);
-    Cell c21 = new Cell(3,3);
+    Cell c21 = new Cell(3,-3);
     List<Cell> cells11 = List.of(c11, c21);
     Ship ship11 = new Ship(cells11, cells11.size());
 
@@ -402,8 +404,18 @@ class ShipTest {
 
     ship11.markHit(c21.getX(), c21.getY());
 
-    assertTrue(ship11.isSunk());
+    assertFalse(ship11.isSunk());
 
+    //CAS X > 10
+    Cell c12 = new Cell(11,3);
+    Cell c22 = new Cell(3,3);
+    List<Cell> cells12 = List.of(c12, c22);
+    Ship ship12 = new Ship(cells12, cells12.size());
+
+    ship11.markHit(c12.getX(), c12.getY());
+    ship11.markHit(c22.getX(), c22.getY());
+
+    assertFalse(ship12.isSunk());
   }
 
 

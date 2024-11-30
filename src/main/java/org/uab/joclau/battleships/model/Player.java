@@ -10,10 +10,17 @@ public class Player {
    * The player's game board.
    */
   private Board board;
+  private String name;
+  private int turnsTaken;
 
   /**
    * Places the player's ships on the board.
    */
+  public Player(String name) {
+    this.name = name;
+    this.turnsTaken = 0;
+    this.board = new Board();
+  }
   public boolean placeShips(Ship ship, int x, int y, boolean isHorizontal) {
     return board.placeShip(ship, x, y, isHorizontal);
   }

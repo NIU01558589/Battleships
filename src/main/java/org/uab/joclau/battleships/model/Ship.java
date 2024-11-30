@@ -116,7 +116,7 @@ public class Ship {
     for(Cell cell: posicionsShip){
 
       if(cell.getX() < 0 || cell.getX() > 10
-          || cell.getY() < 0 || cell.getY() > 10){
+              || cell.getY() < 0 || cell.getY() > 10){
         return false;
       }
 
