@@ -28,17 +28,13 @@ public class GameController {
      */
     public void placeShips(Player player) {
         // Precondició: El jugador no ha de ser nul
-        if (player == null) {
-            throw new IllegalArgumentException("Player cannot be null.");
-        }
+        assert player != null : "Player cannot be null.";
 
         Scanner scanner = new Scanner(System.in);
         System.out.println(player.getName() + ", place your ships:");
 
         // Invariante: El jugador ha de tenir un tauler adequat per col·locar els vaixells
-        if (!player.hasBoard()) {
-            throw new IllegalStateException("Player does not have a valid board to place ships.");
-        }
+        assert player.hasBoard() : "Player does not have a valid board to place ships.";
 
         for (int i = 1; i <= 5; i++) { // En aquest cas, posarem 5 vaixells amb longituds 1,2,3,4,5
             System.out.println("Placing ship of size " + i);
@@ -55,7 +51,7 @@ public class GameController {
                 Ship ship = new Ship(BoardUtils.generateCells(x, y, i, isHorizontal), i);
                 if (player.placeShips(ship, x, y, isHorizontal)) {
                     System.out.println("Ship placed successfully!");
-                    // Postcondició: El vaixell ha estat col·locat correctament
+                    // Postcondición: El vaixell ha estat col·locat correctament
                     placed = true;
 
                 } else {
