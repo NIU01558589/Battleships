@@ -126,14 +126,22 @@ public class Ship {
         return false;
         //No està enfonsat
       }
+
     }
+    if(isHit) {
+      if(!enfonsat) {
+        System.out.println("¡Barco hundido!");
+        setEnfonsat(true); // Marcamos el barco como hundido
+      }
+      return true;
+    }
+
     //Postcondicions
     assert isHit == true:
         "Vaixell enfonsat, totes les ce·les golpejades";
     assert isHit ==false:
         "Vaixell no enfonsat, no totes les cel·les golpejades";
-    return true;
-    //Està enfonsat
+    return false;
   }
 
   /**
