@@ -77,7 +77,8 @@ public class GameController {
             opponent = aux;
         }
 
-        System.out.println("Game over! Winner: " + (player1.getBoard().isGameOver() ? player2.getName() : player1.getName()));
+        System.out.println("Game over! Winner: " + (player1.getBoard().isGameOver()
+                ? player2.getName() : player1.getName()));
     }
 
     public Player getPlayer1() {
