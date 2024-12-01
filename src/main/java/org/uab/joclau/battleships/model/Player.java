@@ -51,4 +51,14 @@ public class Player {
   public String getName() {
     return this.name;
   }
+
+  public boolean hasBoard() {
+    if (!board.getShips().isEmpty())
+    {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
