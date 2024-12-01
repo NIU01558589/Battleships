@@ -53,7 +53,7 @@ public class Board {
         int shipSize = ship.getTamany();
         // Validar que el vaixell no surti dels límits
         if((isHorizontal && (y + shipSize > board[0].length))
-                ||(!isHorizontal &&(x+shipSize > board.length))) {
+                ||(!isHorizontal &&(x+shipSize > board.length)) || (x < 0 || y < 0)) {
             return false;
         }
 

@@ -36,20 +36,19 @@ public class Player {
   }
 
   /**
-   * Checks if the player has lost the game.
-   *
-   * @return true if the player has lost, false otherwise.
-   */
-  public boolean hasLost() {
-    return false;  // Implement loss-check logic
-  }
-
-  /**
    * Returns the player's board.
    *
    * @return the player's board.
    */
   public Board getBoardPlayer() {
     return board;
+  }
+
+  public Board getBoard() {
+    return this.board;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }
